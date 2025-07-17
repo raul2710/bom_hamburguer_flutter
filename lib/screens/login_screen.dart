@@ -1,7 +1,8 @@
+// lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
 
 import 'register_screen.dart';
-import 'reset_password_screen.dart';
+import 'reset_password_screen.dart'; // Imports the reset password screen
 
 class LoginScreen extends StatefulWidget {
   final Future<bool> Function(String username, String password) onLogin;
