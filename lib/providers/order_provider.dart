@@ -10,9 +10,17 @@ class OrderProvider with ChangeNotifier {
   final List<Order> _pastOrders = [];
   final Uuid _uuid = Uuid(); // Instance to generate unique IDs for orders
 
-  List<Order> get pastOrders => [..._pastOrders]; // Returns a copy of past orders
+  List<Order> get pastOrders => [
+    ..._pastOrders,
+  ]; // Returns a copy of past orders
 
-  void placeOrder(String customerName, List<MenuItem> cartItems, double subtotal, double discount, double total) {
+  void placeOrder(
+    String customerName,
+    List<MenuItem> cartItems,
+    double subtotal,
+    double discount,
+    double total,
+  ) {
     final newOrder = Order(
       id: _uuid.v4(), // Generates a unique UUID for the new order
       customerName: customerName,

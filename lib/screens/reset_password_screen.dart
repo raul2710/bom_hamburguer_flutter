@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  final Future<bool> Function(String username, String newPassword) onResetPassword;
+  final Future<bool> Function(String username, String newPassword)
+  onResetPassword;
 
   const ResetPasswordScreen({super.key, required this.onResetPassword});
 
@@ -13,7 +14,8 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmNewPasswordController = TextEditingController();
+  final TextEditingController _confirmNewPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -61,12 +63,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   @override
-  Widget build(BuildContext
-      context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reset Password'),
-      ),
+      appBar: AppBar(title: const Text('Reset Password')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -134,7 +133,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   onPressed: _doResetPassword,
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   child: const Text('Reset Password'),
                 ),

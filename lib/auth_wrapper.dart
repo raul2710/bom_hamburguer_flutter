@@ -15,7 +15,8 @@ class AuthWrapper extends StatefulWidget {
 
 class _AuthWrapperState extends State<AuthWrapper> {
   bool _isLoggedIn = false;
-  bool _isLoading = true; // Indicates whether the initial login status check is in progress
+  bool _isLoading =
+      true; // Indicates whether the initial login status check is in progress
 
   @override
   void initState() {
@@ -23,12 +24,15 @@ class _AuthWrapperState extends State<AuthWrapper> {
     _checkLoginStatus(); // Checks the login status when the widget is initialized
   }
 
-  static const String _loggedInKey = 'isLoggedIn'; // Key for storing login status in SharedPreferences
+  static const String _loggedInKey =
+      'isLoggedIn'; // Key for storing login status in SharedPreferences
 
   Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _isLoggedIn = prefs.getBool(_loggedInKey) ?? false; // Retrieves login status, defaults to false
+      _isLoggedIn =
+          prefs.getBool(_loggedInKey) ??
+          false; // Retrieves login status, defaults to false
       _isLoading = false; // Loading is complete
     });
   }
@@ -38,7 +42,10 @@ class _AuthWrapperState extends State<AuthWrapper> {
     final authService = Provider.of<AuthService>(context, listen: false);
     if (authService.checkCredentials(username, password)) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_loggedInKey, true); // Sets login status to true in local storage
+      await prefs.setBool(
+        _loggedInKey,
+        true,
+      ); // Sets login status to true in local storage
       setState(() {
         _isLoggedIn = true; // Updates the local state to reflect login
       });
@@ -64,17 +71,24 @@ class _AuthWrapperState extends State<AuthWrapper> {
     if (_isLoading) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(), // Shows a loading indicator while checking login status
+          child:
+              CircularProgressIndicator(), // Shows a loading indicator while checking login status
         ),
       );
     } else {
       return _isLoggedIn
-          ? HomeScreen(onLogout: _logout) // If logged in, displays the HomeScreen
+          ? HomeScreen(
+            onLogout: _logout,
+          ) // If logged in, displays the HomeScreen
           : LoginScreen(
-              onLogin: _login, // Passes the login function
-              onRegister: authService.register, // Passes the registration function from AuthService
-              onResetPassword: authService.resetPassword, // Passes the password reset function from AuthService
-            );
+            onLogin: _login, // Passes the login function
+            onRegister:
+                authService
+                    .register, // Passes the registration function from AuthService
+            onResetPassword:
+                authService
+                    .resetPassword, // Passes the password reset function from AuthService
+          );
     }
   }
 }

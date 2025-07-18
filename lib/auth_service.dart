@@ -8,7 +8,8 @@ class AuthService extends ChangeNotifier {
   // Map to store users: {'username': 'password'}
   Map<String, String> _users = {};
 
-  static const String _usersKey = 'appUsers'; // Key for storing user data in SharedPreferences
+  static const String _usersKey =
+      'appUsers'; // Key for storing user data in SharedPreferences
 
   AuthService() {
     _loadUsers(); // Loads user data from local storage when the service is initialized
@@ -27,7 +28,10 @@ class AuthService extends ChangeNotifier {
 
   Future<void> _saveUsers() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_usersKey, json.encode(_users)); // Saves user data to local storage
+    await prefs.setString(
+      _usersKey,
+      json.encode(_users),
+    ); // Saves user data to local storage
   }
 
   bool checkCredentials(String username, String password) {

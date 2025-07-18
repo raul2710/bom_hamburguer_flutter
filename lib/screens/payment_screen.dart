@@ -26,9 +26,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final orderProvider = Provider.of<OrderProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment'),
-      ),
+      appBar: AppBar(title: const Text('Payment')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -36,10 +34,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Order Summary:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const Text(
+                'Order Summary:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 10),
               // Display selected items
-              ...cartProvider.items.map((item) => Text('${item.name} - \$${item.price.toStringAsFixed(2)}')).toList(),
+              ...cartProvider.items
+                  .map(
+                    (item) => Text(
+                      '${item.name} - \$${item.price.toStringAsFixed(2)}',
+                    ),
+                  )
+                  .toList(),
               const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,8 +66,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Total to Pay:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text('\$${cartProvider.totalAmount.toStringAsFixed(2)}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green)),
+                  const Text(
+                    'Total to Pay:',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '\$${cartProvider.totalAmount.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 30),
@@ -88,14 +105,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       cartProvider.discountAmount,
                       cartProvider.totalAmount,
                     );
-                    cartProvider.clearCart(); // Clear the cart after placing the order
+                    cartProvider
+                        .clearCart(); // Clear the cart after placing the order
 
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Order placed successfully!'), backgroundColor: Colors.green),
+                      const SnackBar(
+                        content: Text('Order placed successfully!'),
+                        backgroundColor: Colors.green,
+                      ),
                     );
 
                     // Navigate back to the menu screen or a confirmation screen
-                    Navigator.of(context).popUntil((route) => route.isFirst); // Go back to root
+                    Navigator.of(
+                      context,
+                    ).popUntil((route) => route.isFirst); // Go back to root
                   }
                 },
                 style: ElevatedButton.styleFrom(
