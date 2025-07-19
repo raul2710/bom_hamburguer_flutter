@@ -4,10 +4,6 @@ import 'package:bom_hamburguer_flutter/providers/cart_provider.dart';
 import 'package:bom_hamburguer_flutter/providers/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart'; // For generating unique IDs
-import 'package:device_preview/device_preview.dart'; // For device preview functionality
-import 'package:shared_preferences/shared_preferences.dart'; // For local storage
-import 'dart:convert';
 
 import 'auth_wrapper.dart'; // Required for JSON encoding/decoding
 
@@ -15,10 +11,7 @@ void main() async {
   // Ensures that the Flutter Binding is initialized before accessing SharedPreferences
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    DevicePreview( // Adds DevicePreview for testing on different screen sizes
-      enabled: true, // Set to false to disable in production builds
-      builder: (context) => const MyApp(), // Wraps your main app widget
-    ),
+    const MyApp(), // Directly runs MyApp without DevicePreview
   );
 }
 
@@ -34,9 +27,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OrderProvider()), // Provides order management
       ],
       child: MaterialApp(
-        useInheritedMediaQuery: true, // Required for DevicePreview to work with media queries
-        locale: DevicePreview.locale(context), // Sets the locale based on DevicePreview settings
-        builder: DevicePreview.appBuilder, // Builds the app with DevicePreview's capabilities
         title: 'Bom Hamburguer App',
         debugShowCheckedModeBanner: false, // This line removes the debug banner
         theme: ThemeData(
